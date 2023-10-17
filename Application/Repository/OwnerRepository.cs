@@ -8,15 +8,17 @@ namespace Application.Repository
 {
     public class OwnerRepository : GenericRepository<Owner>, IOwner
     {
-     private readonly VeterinaryDBContext _context;
+        private readonly VeterinaryDBContext _context;
         public OwnerRepository(VeterinaryDBContext context) : base(context)
         {
             _context = context;
         }
 
-   public override async Task<IEnumerable<Owner>> GetAllAsync()
-{
- return await _context.Owners.ToListAsync();
-}  
-}
+        public override async Task<IEnumerable<Owner>> GetAllAsync()
+        {
+            return await _context.Owners.Include(o => o.Pets).ToListAsync();
+        }
+
+        
+    }
 }
