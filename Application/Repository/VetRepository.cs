@@ -16,12 +16,12 @@ namespace Application.Repository
 
         public override async Task<IEnumerable<Vet>> GetAllAsync()
         {
-            return await _context.Vets.ToListAsync();
+            return await _context.Vets.Include(v => v.Specialization).ToListAsync();
         }
 
         public async Task<IEnumerable<Vet>> VascularSurgeonVets (){
 
-            return await _context.Vets.Where(v => v.SpecializationIdFk == 1).ToListAsync();
+            return await _context.Vets.Where(v => v.SpecializationIdFk == 1).Include(v => v.Specialization).ToListAsync();
         }
     }
 }

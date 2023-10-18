@@ -16,17 +16,17 @@ namespace Application.Repository
 
         public override async Task<IEnumerable<Medicine>> GetAllAsync()
         {
-            return await _context.Medicines.ToListAsync();
+            return await _context.Medicines.Include(m => m.Laboratory).ToListAsync();
         }
 
         public async Task<IEnumerable<Medicine>> GenfarMedicines()
         {
-            return await _context.Medicines.Where(m => m.LaboratoryIdFk == 1).ToListAsync();
+            return await _context.Medicines.Where(m => m.LaboratoryIdFk == 1).Include(m => m.Laboratory).ToListAsync();
         }
 
          public async Task<IEnumerable<Medicine>> MedicinesGreaterThan5thousand()
          {
-            return await _context.Medicines.Where(m => m.Price > 5000).ToListAsync();
+            return await _context.Medicines.Where(m => m.Price > 50000).Include(m => m.Laboratory).ToListAsync();
          }
 
          
