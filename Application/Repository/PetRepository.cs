@@ -38,9 +38,13 @@ namespace Application.Repository
             return pets;
         }
 
+        public async Task<IEnumerable<Pet>> PetsAttendedByXVet(string VetName)
+        {
+            return await  _context.Pets.Where(p => p.Appointments.Any(a => a.Vet.Name == VetName)).ToListAsync();
+        }
 
-
-
-
+        public async Task<IEnumerable<Pet>> GoldenRetriever()
+        {
+            return await _context.Pets.Where(p => p.BreedIdFk == 1).ToListAsync();
+        }}
     }
-}

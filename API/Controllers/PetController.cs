@@ -58,6 +58,24 @@ namespace API.Controllers
             return mapper.Map<List<SpeciesGroupDto>>(Pets);
         }
 
+        [HttpGet("AttendedBy/{vetName}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<PetDto>>> PetsAttendedByXVet(string vetName)
+        {
+            var Pets = await _unitOfWork.Pets.PetsAttendedByXVet(vetName);
+            return mapper.Map<List<PetDto>>(Pets);
+        }
+
+         [HttpGet("Breed/Golden-Retriever")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<PetDto>>> GoldenRetrievers()
+        {
+            var Pets = await _unitOfWork.Pets.GoldenRetriever();
+            return mapper.Map<List<PetDto>>(Pets);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

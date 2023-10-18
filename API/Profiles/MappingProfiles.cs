@@ -27,6 +27,9 @@ namespace API.Profiles
             CreateMap<Specialization, SpecializationDto>().ReverseMap();
              CreateMap<Medicine, MedicineDto>().ReverseMap();
             CreateMap<Laboratory, LaboratoryDto>().ReverseMap();
+            CreateMap<Owner, OwnerDto>().ReverseMap();
+
+
 
                
         }

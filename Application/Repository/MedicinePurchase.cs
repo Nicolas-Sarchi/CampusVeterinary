@@ -8,15 +8,16 @@ namespace Application.Repository
 {
     public class MedicinePurchaseRepository : GenericRepository<MedicinePurchase>, IMedicinePurchase
     {
-     private readonly VeterinaryDBContext _context;
+        private readonly VeterinaryDBContext _context;
         public MedicinePurchaseRepository(VeterinaryDBContext context) : base(context)
         {
             _context = context;
         }
 
-   public override async Task<IEnumerable<MedicinePurchase>> GetAllAsync()
-{
- return await _context.MedicinePurchases.ToListAsync();
-}  
-}
+        public override async Task<IEnumerable<MedicinePurchase>> GetAllAsync()
+        {
+            return await _context.MedicinePurchases.ToListAsync();
+        }
+
+    }
 }
