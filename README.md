@@ -1,8 +1,12 @@
 # CampusVeterinary
 
+## Uso
+
+* ⚠️Se debe ejecutar el comando `dotnet ef database update --project ./Persistence/ --startup-project ./API/` para tener la base de datos actualizada
+
 ## Consultas
 
- ### - Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular.
+ ###  Crear un consulta que permita visualizar los veterinarios cuya especialidad sea Cirujano vascular.
 
  * Ruta : `http://localhost:5227/api/Vet/Specialization/Vascular-Surgeon`
 
@@ -11,7 +15,7 @@
 
 
 
- ### - Listar los medicamentos que pertenezcan a el laboratorio Genfar
+ ###  Listar los medicamentos que pertenezcan a el laboratorio Genfar
 
 Ruta : `http://localhost:5227/api/Medicine/Laboratory/Genfar`
 
@@ -44,7 +48,7 @@ Ruta : `http://localhost:5227/api/Pet/Felines`
 
 
 
- ### - Listar los propietarios y sus mascotas.
+ ###  Listar los propietarios y sus mascotas.
  
 Ruta : `http://localhost:5227/api/Owner`
 
@@ -57,7 +61,7 @@ Ruta : `http://localhost:5227/api/Owner`
 
 
 
- ### - Listar los medicamentos que tenga un precio de venta mayor a 50000.
+ ###  Listar los medicamentos que tenga un precio de venta mayor a 50000.
  
 Ruta : `http://localhost:5227/api/Medicine/GreaterThan5Thousand`
   
@@ -70,118 +74,97 @@ Ruta : `http://localhost:5227/api/Medicine/GreaterThan5Thousand`
 
 
 
- ### - Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023
+ ###  Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023
  
-Ruta : ``
-
-![Captura de pantalla 2023-10-15 232649](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/85d89796-6ca5-425c-8640-9c5837a3f9c1)
-
-
-![Captura de pantalla 2023-10-15 232628](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/6a5dd456-c61a-48e8-8728-29c27cdc827d)
+Ruta : `http://localhost:5227/api/Pet/Appointment/Vaccination`
 
 
 
+![Captura de pantalla 2023-10-19 150500](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/74cc2518-92fc-4897-8fe1-db87e22c004a)
 
+
+![Captura de pantalla 2023-10-19 150518](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/c563039e-c91d-4209-973d-fd0bf455b73b)
 
 
 
 
- ### - Listar todas las mascotas agrupadas por especie.
+
+
+ ###  Listar todas las mascotas agrupadas por especie.
   
-Ruta : http://localhost:5143/api/especie/especie-mascota
-
-![Captura de pantalla 2023-10-16 092807](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/03e4e081-c8e1-4659-8439-9f1bfc80591a)
-
-
-![Captura de pantalla 2023-10-16 092736](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/8d880d3f-a6d3-4ce6-b7b6-644d58720b5d)
+Ruta : `http://localhost:5227/api/Pet/BySpecies`
 
 
 
 
+![Captura de pantalla 2023-10-19 150703](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/d490a435-6de3-43cd-904c-a775b33c7b43)
 
 
 
+![Captura de pantalla 2023-10-19 150725](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/d9931908-da4f-4188-b3d0-ee227d3682c2)
 
- ### - Listar todos los movimientos de medicamentos y el valor total de cada movimiento.
+
+
+ ###  Listar todos los movimientos de medicamentos y el valor total de cada movimiento.
  
-Ruta : http://localhost:5143/api/medicamento/movimientos
+Ruta : `http://localhost:5227/api/Medicine/Movements`
 
-![Captura de pantalla 2023-10-16 114117](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/59511e05-7bee-40ad-bc00-2d7a7c94b97c)
 
-![Captura de pantalla 2023-10-16 114100](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/3e7d0ae8-8e46-4b24-a320-645ccab6b23e)
-
+![Captura de pantalla 2023-10-19 150822](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/d40ad97e-706e-4dc7-80cb-cf8415b18fb3)
 
 
 
+![Captura de pantalla 2023-10-19 150923](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/89b1de9a-9899-418c-90e7-be1fb89ec83c)
 
 
- ### - Listar las mascotas que fueron atendidas por un determinado veterinario.
+
+ ### Listar las mascotas que fueron atendidas por un determinado veterinario.
  
-   Le pido que me envie el nombre del veterinario que deseas consultar las mascotas que ha atentido
+  * Ruta : `http://localhost:5227/api/Pet/AttendedBy?vetName=Pedro`
+  * Nombres de los Veterinarios registrados en la base de datos : `Juan` , `Pedro`  
 
 
-Ruta : http://localhost:5143/api/mascota/Veterinario?nombre=Dr. Johnson     ------ Tienes que saber los nombres de los veterinarios que hay en la base de datos
+
+![Captura de pantalla 2023-10-19 151423](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/e40bac24-664e-47e2-944d-76c7da040755)
+
+![Captura de pantalla 2023-10-19 151344](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/cefc1154-2f23-41aa-be9c-6f526f061a1e)
 
 
+
+ ###  Listar los proveedores que me venden un determinado medicamento.
  
-
-![Captura de pantalla 2023-10-16 134000](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/0ef17c73-4473-47dd-87e2-7fafb8aced58)
-
-
-![Captura de pantalla 2023-10-16 134021](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/d9a5227b-f73f-4bd2-8989-c378e60cbcdb)
+* Ruta: `http://localhost:5227/api/Supplier/Sells?medicineName=Amoxicilina`
+* Nombres de los MEdicamentos registrados en la base de datos : `Amoxicilina` , `Gentamicina` , `Acetaminofen` 
 
 
-![Captura de pantalla 2023-10-16 134007](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/4529af4e-1c44-4178-95fb-5f5d8e73f542)
+![Captura de pantalla 2023-10-19 151736](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/7e19e722-22ea-4501-89b9-ffa4cb1f3cc0)
 
 
+![Captura de pantalla 2023-10-19 152109](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/0d9122f4-91b2-4ee9-9527-96ab01e7640a)
 
 
+ ###  Listar las mascotas y sus propietarios cuya raza sea Golden Retriver
 
 
- ### - Listar los proveedores que me venden un determinado medicamento.
- 
-   Le pido que me envie el nombre del medicamento que deseas consultar los proveedores que lo venden
-
-Ruta : http://localhost:5143/api/proveedor/Medicamento?nombre=Ibuprofeno     ------ Tienes que saber los nombres de los medicamentos que hay en la base de datos
-
-
-
-![Captura de pantalla 2023-10-16 135449](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/41cf7912-654a-448c-833c-d6a554e74c86)
-
-![Captura de pantalla 2023-10-16 135516](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/d52257d7-fb95-4d6f-a510-11392cfd16db)
-
-![Captura de pantalla 2023-10-16 135457](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/b5625f67-4809-478a-9201-0e67859c41d9)
+Ruta : `http://localhost:5227/api/Pet/Breed/Golden-Retriever`
 
 
 
 
+![Captura de pantalla 2023-10-19 152334](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/cea7d8d3-5e04-4b73-b06e-e0796dee0a04)
 
 
 
-
- ### - Listar las mascotas y sus propietarios cuya raza sea Golden Retriver
-
-
-Ruta : http://localhost:5143/api/mascota/Retriever 
-
-![Captura de pantalla 2023-10-16 143053](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/145944be-fab9-4f22-a4b5-f4225197b15c)
-
-
-![Captura de pantalla 2023-10-16 143026](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/3686caea-21ac-442d-a07d-92420d11b6f3)
+![Captura de pantalla 2023-10-19 152349](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/0bcac874-6920-43d4-851d-d2d0a9ae8608)
 
 
 
+ ###  Listar la cantidad de mascotas que pertenecen a una raza
+
+Ruta : `http://localhost:5227/api/Breed/petsNumber`
+
+![image](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/049cb9b1-67ee-4d16-b7c5-7ea06423d0ed)
+
+![image](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/d7be4cbb-c047-468a-a3bd-966292010cdd)
 
 
-
-
-
- ### - Listar la cantidad de mascotas que pertenecen a una raza a una raza. Nota: Se debe mostrar una lista de las razas y la cantidad de mascotas que pertenecen a la raza.
-
-
-Ruta : http://localhost:5143/api/mascota/razas 
-
-![Captura de pantalla 2023-10-16 144358](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/8be88f67-5474-4423-93cc-2d73679246f8)
-
-
-![Captura de pantalla 2023-10-16 144332](https://github.com/julianlpz69/VeterinariaCampus/assets/131847060/1f1f7b5f-10e2-4f95-b166-cd149eff6d2b)
