@@ -167,4 +167,11 @@ Ruta : `http://localhost:5227/api/Breed/petsNumber`
 
 ![image](https://github.com/Nicolas-Sarchi/CampusVeterinary/assets/131916765/d7be4cbb-c047-468a-a3bd-966292010cdd)
 
+### JWT
+
+`http://localhost:5227/api/User/refresh-token`
+`http://localhost:5227/api/User/addrole`
+`http://localhost:5227/api/User/token`
+`http://localhost:5227/api/User/register`
+
 
