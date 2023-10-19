@@ -3,10 +3,15 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using System.Linq;
+using API.Helpers;
 namespace API.Controllers
 {
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
+[Authorize]
 public class OwnerController : BaseApiController
 {
 private IUnitOfWork _unitOfWork;
@@ -16,6 +21,7 @@ private readonly IMapper _mapper;
  _unitOfWork = UnitOfWork;
  _mapper = Mapper;
 }
+[ApiVersion("1.0")]
 [HttpGet]
 [ProducesResponseType(StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -32,6 +38,16 @@ public async Task<ActionResult<OwnerDto>> Get(int id)
 {
     var Owner = await _unitOfWork.Owners.GetByIdAsync(id);
     return _mapper.Map<OwnerDto>(Owner);
+}
+[ApiVersion("1.1")]
+[HttpGet]
+[ProducesResponseType(StatusCodes.Status200OK)]
+[ProducesResponseType(StatusCodes.Status400BadRequest)]
+public async Task<ActionResult<Pager<OwnerDto>>> Get([FromQuery]Params OwnerParams)
+{
+var Owner = await _unitOfWork.Owners.GetAllAsync(OwnerParams.PageIndex,OwnerParams.PageSize, OwnerParams.Search, "" , typeof(string));
+var listaOwnersDto= _mapper.Map<List<OwnerDto>>(Owner.registros);
+return new Pager<OwnerDto>(listaOwnersDto, Owner.totalRegistros,OwnerParams.PageIndex,OwnerParams.PageSize,OwnerParams.Search);
 }
 
 [HttpPost]

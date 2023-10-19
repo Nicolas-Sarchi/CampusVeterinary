@@ -3,10 +3,15 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using System.Linq;
+using API.Helpers;
 namespace API.Controllers
 {
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
+[Authorize]
 public class SupplierController : BaseApiController
 {
 private IUnitOfWork _unitOfWork;
@@ -16,6 +21,7 @@ private readonly IMapper _mapper;
  _unitOfWork = UnitOfWork;
  _mapper = Mapper;
 }
+[ApiVersion("1.0")]
 [HttpGet]
 [ProducesResponseType(StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -25,14 +31,6 @@ public async Task<ActionResult<IEnumerable<SupplierDto>>> Get()
     return _mapper.Map<List<SupplierDto>>(Supplier);
 }
 
-[HttpGet("Sells")]
-[ProducesResponseType(StatusCodes.Status200OK)]
-[ProducesResponseType(StatusCodes.Status400BadRequest)]
-public async Task<ActionResult<IEnumerable<SupplierDto>>> GetSuppliersSellsXmedicine(string medicineName)
-{
-    var Supplier = await _unitOfWork.Suppliers.SuppliersSellsXmedicine(medicineName);
-    return _mapper.Map<List<SupplierDto>>(Supplier);
-}
 [HttpGet("{id}")]
 [ProducesResponseType(StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -40,6 +38,16 @@ public async Task<ActionResult<SupplierDto>> Get(int id)
 {
     var Supplier = await _unitOfWork.Suppliers.GetByIdAsync(id);
     return _mapper.Map<SupplierDto>(Supplier);
+}
+[ApiVersion("1.1")]
+[HttpGet]
+[ProducesResponseType(StatusCodes.Status200OK)]
+[ProducesResponseType(StatusCodes.Status400BadRequest)]
+public async Task<ActionResult<Pager<SupplierDto>>> Get([FromQuery]Params SupplierParams)
+{
+var Supplier = await _unitOfWork.Suppliers.GetAllAsync(SupplierParams.PageIndex,SupplierParams.PageSize, SupplierParams.Search, "" , typeof(string));
+var listaSuppliersDto= _mapper.Map<List<SupplierDto>>(Supplier.registros);
+return new Pager<SupplierDto>(listaSuppliersDto, Supplier.totalRegistros,SupplierParams.PageIndex,SupplierParams.PageSize,SupplierParams.Search);
 }
 
 [HttpPost]
@@ -55,8 +63,8 @@ public async Task<ActionResult<Supplier>> Post(SupplierDto SupplierDto)
     {
         return BadRequest();
     }
-    Supplier.Id = Supplier.Id;
-    return CreatedAtAction(nameof(Post), new { id = Supplier.Id }, Supplier);
+    SupplierDto.Id = Supplier.Id;
+    return CreatedAtAction(nameof(Post), new { id = SupplierDto.Id }, Supplier);
 }
 
 [HttpPut("{id}")]

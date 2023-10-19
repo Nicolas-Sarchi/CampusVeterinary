@@ -53,12 +53,13 @@ namespace Application.Repository
             _context.Set<T>()
                 .Update(entity);
         }
-        public async Task<(int totalRegistros, IEnumerable<T> registros)> GetAllAsync(int pageIndex, int pageSize, string search, string Nombre)
+       public async Task<(int totalRegistros, IEnumerable<T> registros)> GetAllAsync(int pageIndex, int pageSize, string search, string Nombre, Type tipoDato)
         {
             var query = _context.Set<T>().AsQueryable();
             if (!string.IsNullOrEmpty(search))
             {
-                query = query.Where(p => EF.Property<string>(p, $"{Nombre}").ToLower().Contains(search.ToLower()));
+                var valor = Convert.ChangeType(search, tipoDato);
+                query = query.Where(p => EF.Property<T>(p, $"{Nombre}").Equals(valor));
             }
             query = query.OrderBy(p => EF.Property<int>(p, "Id"));
             var totalRegistros = await query.CountAsync();
@@ -67,5 +68,6 @@ namespace Application.Repository
                                     .ToListAsync();
             return (totalRegistros, registros);
         }
+
     }
 }

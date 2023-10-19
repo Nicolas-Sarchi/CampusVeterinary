@@ -21,7 +21,11 @@ namespace Application.Repository
 
         public async Task<IEnumerable<Supplier>> SuppliersSellsXmedicine(string medicineName)
         {
-            return await _context.Suppliers.Where(s => s.MedicinePurchases.Any(mp => mp.PurchaseDetails.Any(pd => pd.Medicine.Name == medicineName))).ToListAsync();
+            return await _context.Suppliers
+            .Where(s => s.MedicinePurchases
+            .Any(mp => mp.PurchaseDetails
+            .Any(pd => pd.Medicine.Name == medicineName)))
+            .ToListAsync();
         }
 
     }

@@ -1,15 +1,17 @@
 using API.Dtos;
-using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using System.Linq;
+using API.Helpers;
 namespace API.Controllers
 {
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
+[Authorize]
 public class MedicinePurchaseController : BaseApiController
 {
 private IUnitOfWork _unitOfWork;
@@ -43,7 +45,7 @@ public async Task<ActionResult<MedicinePurchaseDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<MedicinePurchaseDto>>> Get([FromQuery]Params MedicinePurchaseParams)
 {
-var MedicinePurchase = await _unitOfWork.MedicinePurchases.GetAllAsync(MedicinePurchaseParams.PageIndex,MedicinePurchaseParams.PageSize, MedicinePurchaseParams.Search, "id");
+var MedicinePurchase = await _unitOfWork.MedicinePurchases.GetAllAsync(MedicinePurchaseParams.PageIndex,MedicinePurchaseParams.PageSize, MedicinePurchaseParams.Search, "" , typeof(string));
 var listaMedicinePurchasesDto= _mapper.Map<List<MedicinePurchaseDto>>(MedicinePurchase.registros);
 return new Pager<MedicinePurchaseDto>(listaMedicinePurchasesDto, MedicinePurchase.totalRegistros,MedicinePurchaseParams.PageIndex,MedicinePurchaseParams.PageSize,MedicinePurchaseParams.Search);
 }
@@ -61,8 +63,8 @@ public async Task<ActionResult<MedicinePurchase>> Post(MedicinePurchaseDto Medic
     {
         return BadRequest();
     }
-    MedicinePurchase.Id = MedicinePurchase.Id;
-    return CreatedAtAction(nameof(Post), new { id = MedicinePurchase.Id }, MedicinePurchase);
+    MedicinePurchaseDto.Id = MedicinePurchase.Id;
+    return CreatedAtAction(nameof(Post), new { id = MedicinePurchaseDto.Id }, MedicinePurchase);
 }
 
 [HttpPut("{id}")]

@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Linq;
 using API.Helpers;
+using Microsoft.AspNetCore.Authorization;
 namespace API.Controllers
 {
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
+[Authorize]
 public class MedicalTreatmentController : BaseApiController
 {
 private IUnitOfWork _unitOfWork;
@@ -43,7 +45,7 @@ public async Task<ActionResult<MedicalTreatmentDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<MedicalTreatmentDto>>> Get([FromQuery]Params MedicalTreatmentParams)
 {
-var MedicalTreatment = await _unitOfWork.MedicalTreatments.GetAllAsync(MedicalTreatmentParams.PageIndex,MedicalTreatmentParams.PageSize, MedicalTreatmentParams.Search,  "Id");
+var MedicalTreatment = await _unitOfWork.MedicalTreatments.GetAllAsync(MedicalTreatmentParams.PageIndex,MedicalTreatmentParams.PageSize, MedicalTreatmentParams.Search, "date" ,typeof(DateOnly));
 var listaMedicalTreatmentsDto= _mapper.Map<List<MedicalTreatmentDto>>(MedicalTreatment.registros);
 return new Pager<MedicalTreatmentDto>(listaMedicalTreatmentsDto, MedicalTreatment.totalRegistros,MedicalTreatmentParams.PageIndex,MedicalTreatmentParams.PageSize,MedicalTreatmentParams.Search);
 }

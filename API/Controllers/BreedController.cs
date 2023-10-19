@@ -5,8 +5,11 @@ using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Linq;
+using API.Helpers;
 namespace API.Controllers
 {
+    [ApiVersion("1.0")]
+    [ApiVersion("1.1")]
     public class BreedController : BaseApiController
     {
         private IUnitOfWork _unitOfWork;
@@ -16,6 +19,7 @@ namespace API.Controllers
             _unitOfWork = UnitOfWork;
             _mapper = Mapper;
         }
+        [ApiVersion("1.0")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -24,7 +28,6 @@ namespace API.Controllers
             var Breed = await _unitOfWork.Breeds.GetAllAsync();
             return _mapper.Map<List<BreedDto>>(Breed);
         }
-
         [HttpGet("petsNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -44,6 +47,16 @@ namespace API.Controllers
             var Breed = await _unitOfWork.Breeds.GetByIdAsync(id);
             return _mapper.Map<BreedDto>(Breed);
         }
+        [ApiVersion("1.1")]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Pager<BreedDto>>> Get([FromQuery] Params BreedParams)
+        {
+            var Breed = await _unitOfWork.Breeds.GetAllAsync(BreedParams.PageIndex, BreedParams.PageSize, BreedParams.Search, "", typeof(string));
+            var listaBreedsDto = _mapper.Map<List<BreedDto>>(Breed.registros);
+            return new Pager<BreedDto>(listaBreedsDto, Breed.totalRegistros, BreedParams.PageIndex, BreedParams.PageSize, BreedParams.Search);
+        }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -58,8 +71,8 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-            Breed.Id = Breed.Id;
-            return CreatedAtAction(nameof(Post), new { id = Breed.Id }, Breed);
+            BreedDto.Id = Breed.Id;
+            return CreatedAtAction(nameof(Post), new { id = BreedDto.Id }, Breed);
         }
 
         [HttpPut("{id}")]

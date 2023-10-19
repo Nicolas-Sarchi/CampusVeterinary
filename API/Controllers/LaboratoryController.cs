@@ -3,6 +3,7 @@ using API.Helpers;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace API.Controllers
 {
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
+[Authorize]
 public class LaboratoryController : BaseApiController
 {
 private IUnitOfWork _unitOfWork;
@@ -44,7 +46,7 @@ public async Task<ActionResult<LaboratoryDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<LaboratoryDto>>> Get([FromQuery]Params LaboratoryParams)
 {
-var Laboratory = await _unitOfWork.Laboratories.GetAllAsync(LaboratoryParams.PageIndex,LaboratoryParams.PageSize, LaboratoryParams.Search, "Name");
+var Laboratory = await _unitOfWork.Laboratories.GetAllAsync(LaboratoryParams.PageIndex,LaboratoryParams.PageSize, LaboratoryParams.Search, "Name", typeof(string));
 var listaLaboratoriesDto= _mapper.Map<List<LaboratoryDto>>(Laboratory.registros);
 return new Pager<LaboratoryDto>(listaLaboratoriesDto, Laboratory.totalRegistros,LaboratoryParams.PageIndex,LaboratoryParams.PageSize,LaboratoryParams.Search);
 }

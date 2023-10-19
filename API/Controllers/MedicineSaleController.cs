@@ -3,6 +3,7 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using System.Linq;
 using API.Helpers;
@@ -10,6 +11,7 @@ namespace API.Controllers
 {
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
+[Authorize]
 public class MedicineSaleController : BaseApiController
 {
 private IUnitOfWork _unitOfWork;
@@ -43,7 +45,7 @@ public async Task<ActionResult<MedicineSaleDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<MedicineSaleDto>>> Get([FromQuery]Params MedicineSaleParams)
 {
-var MedicineSale = await _unitOfWork.MedicineSales.GetAllAsync(MedicineSaleParams.PageIndex,MedicineSaleParams.PageSize, MedicineSaleParams.Search, " SearchParam");
+var MedicineSale = await _unitOfWork.MedicineSales.GetAllAsync(MedicineSaleParams.PageIndex,MedicineSaleParams.PageSize, MedicineSaleParams.Search, "" , typeof(string));
 var listaMedicineSalesDto= _mapper.Map<List<MedicineSaleDto>>(MedicineSale.registros);
 return new Pager<MedicineSaleDto>(listaMedicineSalesDto, MedicineSale.totalRegistros,MedicineSaleParams.PageIndex,MedicineSaleParams.PageSize,MedicineSaleParams.Search);
 }
