@@ -47,8 +47,8 @@ public async Task<ActionResult<Owner>> Post(OwnerDto OwnerDto)
     {
         return BadRequest();
     }
-    Owner.Id = Owner.Id;
-    return CreatedAtAction(nameof(Post), new { id = Owner.Id }, Owner);
+    OwnerDto.Id = Owner.Id;
+    return CreatedAtAction(nameof(Post), new { id = OwnerDto.Id }, Owner);
 }
 
 [HttpPut("{id}")]

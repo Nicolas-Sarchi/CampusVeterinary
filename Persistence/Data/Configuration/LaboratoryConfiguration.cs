@@ -23,7 +23,9 @@ namespace Persistence.Data.Configurations;
         .HasMaxLength(100);
 
         builder.HasData(
-            new Laboratory {Id = 1, Address = "Calle 23 # 23-34", Name = "Genfar", Phone=  "31311"}
+            new Laboratory {Id = 1, Address = "Calle 23 # 23-34", Name = "Genfar", Phone=  "31311"},
+            new Laboratory {Id = 2, Address = "Calle 23 # 23-34", Name = "Bayer", Phone=  "3133453411"}
+
           );
   }
   }

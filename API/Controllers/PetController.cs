@@ -43,10 +43,10 @@ namespace API.Controllers
         [HttpGet("Appointment/Vaccination")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<PetDto>>> GetVaccinationPets()
+        public async Task<ActionResult<IEnumerable<VaccinationDto>>> GetVaccinationPets()
         {
             var Pets = await _unitOfWork.Pets.VaccinationAppointment2023();
-            return mapper.Map<List<PetDto>>(Pets);
+            return mapper.Map<List<VaccinationDto>>(Pets);
         }
 
         [HttpGet("BySpecies")]
@@ -58,13 +58,13 @@ namespace API.Controllers
             return mapper.Map<List<SpeciesGroupDto>>(Pets);
         }
 
-        [HttpGet("AttendedBy/{vetName}")]
+        [HttpGet("AttendedBy/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<PetDto>>> PetsAttendedByXVet(string vetName)
+        public async Task<ActionResult<IEnumerable<AttendedByDto>>> PetsAttendedByXVet(string vetName)
         {
             var Pets = await _unitOfWork.Pets.PetsAttendedByXVet(vetName);
-            return mapper.Map<List<PetDto>>(Pets);
+            return mapper.Map<List<AttendedByDto>>(Pets);
         }
 
          [HttpGet("Breed/Golden-Retriever")]

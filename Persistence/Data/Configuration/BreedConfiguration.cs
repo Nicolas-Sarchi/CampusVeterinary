@@ -20,7 +20,8 @@ namespace Persistence.Data.Configurations;
 
         builder.HasData(
             new Breed {Id = 1, Name = "Golden Retriever", SpeciesIdFk= 1},
-            new Breed {Id = 2, Name = "Cocker Spaniel", SpeciesIdFk= 1}
+            new Breed {Id = 2, Name = "Cocker Spaniel", SpeciesIdFk= 1},
+            new Breed {Id = 3, Name = "Persian", SpeciesIdFk= 2}
         );
   }
   }

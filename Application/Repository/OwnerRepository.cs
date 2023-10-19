@@ -16,7 +16,7 @@ namespace Application.Repository
 
         public override async Task<IEnumerable<Owner>> GetAllAsync()
         {
-            return await _context.Owners.Include(o => o.Pets).ToListAsync();
+            return await _context.Owners.Include(o => o.Pets).ThenInclude(p => p.Breed).ToListAsync();
         }
 
         

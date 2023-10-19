@@ -23,7 +23,9 @@ namespace Persistence.Data.Configurations;
         .HasForeignKey(p => p.SupplierIdFk);
 
         builder.HasData(
-            new MedicinePurchase {Id =1, Date= DateOnly.Parse("2023-12-22"), SupplierIdFk = 1, Total = 12000}
+            new MedicinePurchase {Id =1, Date= DateOnly.Parse("2023-12-22"), SupplierIdFk = 1, Total = 12000},
+            new MedicinePurchase {Id =2, Date= DateOnly.Parse("2023-10-22"), SupplierIdFk = 2, Total = 500000}
+
         );
   }
   }

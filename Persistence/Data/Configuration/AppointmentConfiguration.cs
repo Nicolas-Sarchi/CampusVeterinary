@@ -27,7 +27,9 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         .HasForeignKey(p => p.VetIdFk);
 
         builder.HasData(
-            new Appointment {Id =1, Date = DateOnly.Parse("2023-03-12"), Time= TimeOnly.Parse("10:30:00") ,PetIdFk = 2, Reason= "vacunacion", VetIdFk=1}
+            new Appointment {Id =1, Date = DateOnly.Parse("2023-03-12"), Time= TimeOnly.Parse("10:30:00") ,PetIdFk = 2, Reason= "vacunacion", VetIdFk=1},
+            new Appointment {Id =2, Date = DateOnly.Parse("2023-10-19"), Time= TimeOnly.Parse("13:45:00") ,PetIdFk = 1, Reason= "vacunacion", VetIdFk=1},
+            new Appointment {Id =3, Date = DateOnly.Parse("2023-12-21"), Time= TimeOnly.Parse("09:15:00") ,PetIdFk = 3, Reason= "Baño", VetIdFk=2}
         );
     }
 }

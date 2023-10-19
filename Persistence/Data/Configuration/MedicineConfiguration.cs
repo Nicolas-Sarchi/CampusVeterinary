@@ -28,7 +28,9 @@ namespace Persistence.Data.Configurations;
 
          builder.HasData(
             new Medicine {Id = 1, Name = "Amoxicilina", Stock = 100, Price = 12000, LaboratoryIdFk = 1},
-            new Medicine {Id = 2, Name = "Gentamicina", Stock = 100, Price = 15000, LaboratoryIdFk = 1}
+            new Medicine {Id = 2, Name = "Gentamicina", Stock = 100, Price = 15000, LaboratoryIdFk = 1},
+            new Medicine {Id = 3, Name = "Acetaminofen", Stock = 1003, Price = 50500, LaboratoryIdFk = 2}
+
         );
   }
   }

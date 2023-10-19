@@ -27,7 +27,8 @@ namespace Persistence.Data.Configurations;
         .HasForeignKey(p => p.SpecializationIdFk);
 
         builder.HasData(
-            new Vet {Id =1, Email = "adas@qw", Name = "Juan", Phone = "12332", SpecializationIdFk= 1}
+            new Vet {Id =1, Email = "adas@qw", Name = "Juan", Phone = "12332", SpecializationIdFk= 1},
+            new Vet {Id =2, Email = "erfdc@qdfw", Name = "Pedro", Phone = "555555", SpecializationIdFk= 2}
+
         );
-  }
-  }
+      }  }

@@ -26,7 +26,8 @@ namespace Persistence.Data.Configurations;
         .HasForeignKey(p => p.MedicineIdFk);
 
         builder.HasData(
-            new PurchaseDetail {Id = 1, IdMedicinePurchaseFk = 1, MedicineIdFk= 1, Quantity= 1, Subtotal = 12000}
+            new PurchaseDetail {Id = 1, IdMedicinePurchaseFk = 1, MedicineIdFk= 1, Quantity= 1, Subtotal = 12000},
+            new PurchaseDetail {Id = 2, IdMedicinePurchaseFk = 2, MedicineIdFk= 3, Quantity= 10, Subtotal = 500000}
         );
   }
   }

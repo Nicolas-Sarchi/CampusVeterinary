@@ -11,7 +11,7 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(VeterinaryDBContext))]
-    [Migration("20231016211708_InitialCreate")]
+    [Migration("20231019164437_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -62,6 +62,24 @@ namespace Persistence.Data.Migrations
                             Reason = "vacunacion",
                             Time = new TimeOnly(10, 30, 0),
                             VetIdFk = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateOnly(2023, 10, 19),
+                            PetIdFk = 1,
+                            Reason = "vacunacion",
+                            Time = new TimeOnly(13, 45, 0),
+                            VetIdFk = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateOnly(2023, 12, 21),
+                            PetIdFk = 3,
+                            Reason = "Baño",
+                            Time = new TimeOnly(9, 15, 0),
+                            VetIdFk = 2
                         });
                 });
 
@@ -97,6 +115,12 @@ namespace Persistence.Data.Migrations
                             Id = 2,
                             Name = "Cocker Spaniel",
                             SpeciesIdFk = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Persian",
+                            SpeciesIdFk = 2
                         });
                 });
 
@@ -132,6 +156,13 @@ namespace Persistence.Data.Migrations
                             Address = "Calle 23 # 23-34",
                             Name = "Genfar",
                             Phone = "31311"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Calle 23 # 23-34",
+                            Name = "Bayer",
+                            Phone = "3133453411"
                         });
                 });
 
@@ -222,6 +253,14 @@ namespace Persistence.Data.Migrations
                             Name = "Gentamicina",
                             Price = 15000m,
                             Stock = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            LaboratoryIdFk = 2,
+                            Name = "Acetaminofen",
+                            Price = 50500m,
+                            Stock = 1003
                         });
                 });
 
@@ -253,6 +292,13 @@ namespace Persistence.Data.Migrations
                             Date = new DateOnly(2023, 12, 22),
                             SupplierIdFk = 1,
                             Total = 12000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateOnly(2023, 10, 22),
+                            SupplierIdFk = 2,
+                            Total = 500000m
                         });
                 });
 
@@ -319,6 +365,13 @@ namespace Persistence.Data.Migrations
                             Email = "nicolas@google.com",
                             Name = "Nicolas",
                             Phone = "12321"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "rob@google.com",
+                            Name = "ROberto",
+                            Phone = "666666"
                         });
                 });
 
@@ -366,6 +419,14 @@ namespace Persistence.Data.Migrations
                             BreedIdFk = 1,
                             Name = "Paco",
                             OwnerIdFk = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BirthDate = new DateOnly(2019, 9, 21),
+                            BreedIdFk = 3,
+                            Name = "Michi",
+                            OwnerIdFk = 2
                         });
                 });
 
@@ -403,6 +464,14 @@ namespace Persistence.Data.Migrations
                             MedicineIdFk = 1,
                             Quantity = 1,
                             Subtotal = 12000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IdMedicinePurchaseFk = 2,
+                            MedicineIdFk = 3,
+                            Quantity = 10,
+                            Subtotal = 500000m
                         });
                 });
 
@@ -667,6 +736,14 @@ namespace Persistence.Data.Migrations
                             Name = "Juan",
                             Phone = "12332",
                             SpecializationIdFk = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "erfdc@qdfw",
+                            Name = "Pedro",
+                            Phone = "555555",
+                            SpecializationIdFk = 2
                         });
                 });
 

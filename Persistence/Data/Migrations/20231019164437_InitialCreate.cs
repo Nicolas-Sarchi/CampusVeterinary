@@ -467,12 +467,20 @@ namespace Persistence.Data.Migrations
             migrationBuilder.InsertData(
                 table: "laboratory",
                 columns: new[] { "Id", "Address", "Name", "Phone" },
-                values: new object[] { 1, "Calle 23 # 23-34", "Genfar", "31311" });
+                values: new object[,]
+                {
+                    { 1, "Calle 23 # 23-34", "Genfar", "31311" },
+                    { 2, "Calle 23 # 23-34", "Bayer", "3133453411" }
+                });
 
             migrationBuilder.InsertData(
                 table: "owner",
                 columns: new[] { "Id", "Email", "Name", "Phone" },
-                values: new object[] { 1, "nicolas@google.com", "Nicolas", "12321" });
+                values: new object[,]
+                {
+                    { 1, "nicolas@google.com", "Nicolas", "12321" },
+                    { 2, "rob@google.com", "ROberto", "666666" }
+                });
 
             migrationBuilder.InsertData(
                 table: "species",
@@ -495,7 +503,11 @@ namespace Persistence.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Veterinarian",
                 columns: new[] { "Id", "Email", "Name", "Phone", "SpecializationIdFk" },
-                values: new object[] { 1, "adas@qw", "Juan", "12332", 1 });
+                values: new object[,]
+                {
+                    { 1, "adas@qw", "Juan", "12332", 1 },
+                    { 2, "erfdc@qdfw", "Pedro", "555555", 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "breed",
@@ -503,7 +515,8 @@ namespace Persistence.Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Golden Retriever", 1 },
-                    { 2, "Cocker Spaniel", 1 }
+                    { 2, "Cocker Spaniel", 1 },
+                    { 3, "Persian", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -512,13 +525,18 @@ namespace Persistence.Data.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "Amoxicilina", 12000m, 100 },
-                    { 2, 1, "Gentamicina", 15000m, 100 }
+                    { 2, 1, "Gentamicina", 15000m, 100 },
+                    { 3, 2, "Acetaminofen", 50500m, 1003 }
                 });
 
             migrationBuilder.InsertData(
                 table: "medicine_purchase",
                 columns: new[] { "Id", "Date", "SupplierIdFk", "Total" },
-                values: new object[] { 1, new DateOnly(2023, 12, 22), 1, 12000m });
+                values: new object[,]
+                {
+                    { 1, new DateOnly(2023, 12, 22), 1, 12000m },
+                    { 2, new DateOnly(2023, 10, 22), 2, 500000m }
+                });
 
             migrationBuilder.InsertData(
                 table: "medicine_sale",
@@ -531,13 +549,18 @@ namespace Persistence.Data.Migrations
                 values: new object[,]
                 {
                     { 1, new DateOnly(2016, 4, 20), 2, "Oliver", 1 },
-                    { 2, new DateOnly(2020, 3, 12), 1, "Paco", 1 }
+                    { 2, new DateOnly(2020, 3, 12), 1, "Paco", 1 },
+                    { 3, new DateOnly(2019, 9, 21), 3, "Michi", 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "purchase_detail",
                 columns: new[] { "Id", "IdMedicinePurchaseFk", "MedicineIdFk", "Quantity", "Subtotal" },
-                values: new object[] { 1, 1, 1, 1, 12000m });
+                values: new object[,]
+                {
+                    { 1, 1, 1, 1, 12000m },
+                    { 2, 2, 3, 10, 500000m }
+                });
 
             migrationBuilder.InsertData(
                 table: "sale_detail",
@@ -547,7 +570,12 @@ namespace Persistence.Data.Migrations
             migrationBuilder.InsertData(
                 table: "appointment",
                 columns: new[] { "Id", "Date", "PetIdFk", "Reason", "Time", "VetIdFk" },
-                values: new object[] { 1, new DateOnly(2023, 3, 12), 2, "vacunacion", new TimeOnly(10, 30, 0), 1 });
+                values: new object[,]
+                {
+                    { 1, new DateOnly(2023, 3, 12), 2, "vacunacion", new TimeOnly(10, 30, 0), 1 },
+                    { 2, new DateOnly(2023, 10, 19), 1, "vacunacion", new TimeOnly(13, 45, 0), 1 },
+                    { 3, new DateOnly(2023, 12, 21), 3, "Baño", new TimeOnly(9, 15, 0), 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "medical_treatment",

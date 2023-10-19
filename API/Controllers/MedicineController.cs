@@ -46,6 +46,15 @@ namespace API.Controllers
             return mapper.Map<List<MedicineDto>>(Medicine);
         }
 
+        [HttpGet("Movements")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<MedicineMovementDto>>> MedicineMovements()
+        {
+            var Medicine = await _unitOfWork.Medicines.MedicineMovements();
+            return mapper.Map<List<MedicineMovementDto>>(Medicine);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

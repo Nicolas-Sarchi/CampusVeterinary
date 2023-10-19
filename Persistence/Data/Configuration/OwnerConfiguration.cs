@@ -22,7 +22,9 @@ namespace Persistence.Data.Configurations;
         .HasMaxLength(20);
 
         builder.HasData(
-            new Owner {Id = 1, Name = "Nicolas", Email = "nicolas@google.com", Phone = "12321"}
+            new Owner {Id = 1, Name = "Nicolas", Email = "nicolas@google.com", Phone = "12321"},
+            new Owner {Id = 2, Name = "ROberto", Email = "rob@google.com", Phone = "666666"}
+
         );
   }
   }

@@ -29,6 +29,11 @@ namespace Application.Repository
             return await _context.Medicines.Where(m => m.Price > 50000).Include(m => m.Laboratory).ToListAsync();
          }
 
+         public async Task<IEnumerable<Medicine>> MedicineMovements()
+         {
+            return await _context.Medicines.Include(m => m.PurchaseDetails).Include(m => m.SaleDetails).ToListAsync();
+         }
+
          
     }
 }
