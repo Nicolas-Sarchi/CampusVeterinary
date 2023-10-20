@@ -53,51 +53,51 @@ namespace Application.Repository
             _context.Set<T>()
                 .Update(entity);
         }
- public async Task<(int totalRegistros, IEnumerable<T> registros)> GetAllAsync(int pageIndex, int pageSize, string search, string Nombre)
+public async Task<(int totalRegistros, IEnumerable<T> registros)> GetAllAsync(int pageIndex, int pageSize, string search, string Nombre)
 {
     var query = _context.Set<T>().AsQueryable();
-    var totalRegistros = 0;
-    List<T> registros = new List<T>();
 
     if (!string.IsNullOrEmpty(search))
     {
         var propertyType = _context.Model.FindEntityType(typeof(T)).FindProperty(Nombre).ClrType;
 
-        int.TryParse(search, out var searchInt);
-        long.TryParse(search, out var searchLong);
-        DateTime.TryParse(search, out var searchDate);
-        TimeSpan.TryParse(search, out var searchTime);
-
-        query = query.Where(p => 
-            (propertyType == typeof(string) && EF.Property<string>(p, Nombre).ToLower().Contains(search.ToLower())) ||
-            (propertyType == typeof(int) && EF.Property<int>(p, Nombre) == searchInt) ||
-            (propertyType == typeof(long) && EF.Property<long>(p, Nombre) == searchLong) ||
-            (propertyType == typeof(DateTime) && EF.Property<DateTime>(p, Nombre).Date == searchDate.Date) ||
-            (propertyType == typeof(TimeSpan) && EF.Property<TimeSpan>(p, Nombre) == searchTime)
-            // Añade aquí más condiciones para otros tipos de datos si es necesario
-        );
-
-        totalRegistros = await query.CountAsync();
-        if (totalRegistros > 0)
+        if (propertyType == typeof(string))
         {
-            registros = await query
-                                .Skip((pageIndex - 1) * pageSize)
-                                .Take(pageSize)
-                                .ToListAsync();
+            query = query.Where(p => EF.Property<string>(p, Nombre).ToLower().Contains(search.ToLower()));
         }
+        else if (propertyType == typeof(int) || propertyType == typeof(long))
+        {
+            if (long.TryParse(search, out var searchLong))
+            {
+                query = query.Where(p => EF.Property<long>(p, Nombre) == searchLong);
+            }
+        }
+        else if (propertyType == typeof(DateTime))
+        {
+            if (DateTime.TryParse(search, out var searchDate))
+            {
+                query = query.Where(p => EF.Property<DateTime>(p, Nombre).Date == searchDate.Date);
+            }
+        }
+        else if (propertyType == typeof(TimeSpan))
+        {
+            if (TimeSpan.TryParse(search, out var searchTime))
+            {
+                query = query.Where(p => EF.Property<TimeSpan>(p, Nombre) == searchTime);
+            }
+        }
+        // Añade aquí más condiciones para otros tipos de datos si es necesario
     }
-    else
-    {
-        query = query.OrderBy(p => EF.Property<int>(p, "Id"));
-        totalRegistros = await query.CountAsync();
-        registros = await query
+
+    var totalRegistros = await query.CountAsync();
+    var registros = totalRegistros > 0 ? await query
                             .Skip((pageIndex - 1) * pageSize)
                             .Take(pageSize)
-                            .ToListAsync();
-    }
+                            .ToListAsync() : new List<T>();
 
     return (totalRegistros, registros);
 }
+
 
 
 

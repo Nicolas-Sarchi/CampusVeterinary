@@ -40,7 +40,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Pager<SpecieswithBreedDto>>> Get11([FromQuery] Params speciesParams)
         {
-            var species = await _unitOfWork.Species.GetAllAsync(speciesParams.PageIndex, speciesParams.PageSize, speciesParams.Search,"id");
+            var species = await _unitOfWork.Species.GetAllAsync(speciesParams.PageIndex, speciesParams.PageSize, speciesParams.Search,"Id");
             var speciesList = mapper.Map<List<SpecieswithBreedDto>>(species.registros);
            return new Pager<SpecieswithBreedDto>(speciesList, species.totalRegistros ,speciesParams.PageIndex,speciesParams.PageSize,speciesParams.Search);
         }
