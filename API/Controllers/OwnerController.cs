@@ -43,11 +43,18 @@ public async Task<ActionResult<OwnerDto>> Get(int id)
 [HttpGet]
 [ProducesResponseType(StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
-public async Task<ActionResult<Pager<OwnerDto>>> Get([FromQuery]Params OwnerParams)
+public async Task<ActionResult<Pager<OwnerDto>>> Get([FromQuery] Params OwnerParams)
 {
-var Owner = await _unitOfWork.Owners.GetAllAsync(OwnerParams.PageIndex,OwnerParams.PageSize, OwnerParams.Search, "" , typeof(string));
-var listaOwnersDto= _mapper.Map<List<OwnerDto>>(Owner.registros);
-return new Pager<OwnerDto>(listaOwnersDto, Owner.totalRegistros,OwnerParams.PageIndex,OwnerParams.PageSize,OwnerParams.Search);
+    var (totalRegistros, registros) = await _unitOfWork.Owners.GetAllAsync(
+        OwnerParams.PageIndex,
+        OwnerParams.PageSize,
+        OwnerParams.Search,
+        "Name"
+    );
+
+    var listaOwnersDto = _mapper.Map<List<OwnerDto>>(registros);
+    
+    return new Pager<OwnerDto>(listaOwnersDto, totalRegistros, OwnerParams.PageIndex, OwnerParams.PageSize, OwnerParams.Search);
 }
 
 [HttpPost]

@@ -45,7 +45,7 @@ public async Task<ActionResult<SpecializationDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<SpecializationDto>>> Get([FromQuery]Params SpecializationParams)
 {
-var Specialization = await _unitOfWork.Specializations.GetAllAsync(SpecializationParams.PageIndex,SpecializationParams.PageSize, SpecializationParams.Search, "" , typeof(string));
+var Specialization = await _unitOfWork.Specializations.GetAllAsync(SpecializationParams.PageIndex,SpecializationParams.PageSize, SpecializationParams.Search, "Name" );
 var listaSpecializationsDto= _mapper.Map<List<SpecializationDto>>(Specialization.registros);
 return new Pager<SpecializationDto>(listaSpecializationsDto, Specialization.totalRegistros,SpecializationParams.PageIndex,SpecializationParams.PageSize,SpecializationParams.Search);
 }

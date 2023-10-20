@@ -514,6 +514,18 @@ namespace Persistence.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Employee"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.SaleDetail", b =>

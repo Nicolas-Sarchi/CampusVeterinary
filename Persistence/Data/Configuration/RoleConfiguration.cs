@@ -13,5 +13,10 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(p => p.Name)
         .IsRequired()
         .HasMaxLength(50);
+
+        builder.HasData(
+            new Role {Id = 1, Name = "Admin"},
+            new Role {Id = 2, Name = "Employee"}
+        );
     }
 }

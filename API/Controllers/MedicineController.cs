@@ -72,7 +72,7 @@ public async Task<ActionResult<MedicineDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<MedicineDto>>> Get([FromQuery]Params MedicineParams)
 {
-var Medicine = await _unitOfWork.Medicines.GetAllAsync(MedicineParams.PageIndex,MedicineParams.PageSize, MedicineParams.Search, "" , typeof(string));
+var Medicine = await _unitOfWork.Medicines.GetAllAsync(MedicineParams.PageIndex,MedicineParams.PageSize, MedicineParams.Search, "Name" );
 var listaMedicinesDto= _mapper.Map<List<MedicineDto>>(Medicine.registros);
 return new Pager<MedicineDto>(listaMedicinesDto, Medicine.totalRegistros,MedicineParams.PageIndex,MedicineParams.PageSize,MedicineParams.Search);
 }

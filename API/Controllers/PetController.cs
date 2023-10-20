@@ -89,7 +89,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Pager<PetDto>>> Get([FromQuery] Params PetParams)
         {
-            var Pet = await _unitOfWork.Pets.GetAllAsync(PetParams.PageIndex, PetParams.PageSize, PetParams.Search, "", typeof(string));
+            var Pet = await _unitOfWork.Pets.GetAllAsync(PetParams.PageIndex, PetParams.PageSize, PetParams.Search, "Name");
             var listaPetsDto = _mapper.Map<List<PetDto>>(Pet.registros);
             return new Pager<PetDto>(listaPetsDto, Pet.totalRegistros, PetParams.PageIndex, PetParams.PageSize, PetParams.Search);
         }

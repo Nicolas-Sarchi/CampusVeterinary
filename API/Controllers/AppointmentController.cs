@@ -45,7 +45,7 @@ public async Task<ActionResult<AppointmentDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<AppointmentDto>>> Get([FromQuery]Params AppointmentParams)
 {
-var Appointment = await _unitOfWork.Appointments.GetAllAsync(AppointmentParams.PageIndex,AppointmentParams.PageSize, AppointmentParams.Search,  "id", typeof(Appointment));
+var Appointment = await _unitOfWork.Appointments.GetAllAsync(AppointmentParams.PageIndex,AppointmentParams.PageSize, AppointmentParams.Search,  "id");
 var listaAppointmentsDto= _mapper.Map<List<AppointmentDto>>(Appointment.registros);
 return new Pager<AppointmentDto>(listaAppointmentsDto, Appointment.totalRegistros,AppointmentParams.PageIndex,AppointmentParams.PageSize,AppointmentParams.Search);
 }

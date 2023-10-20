@@ -46,7 +46,7 @@ public async Task<ActionResult<LaboratoryDto>> Get(int id)
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 public async Task<ActionResult<Pager<LaboratoryDto>>> Get([FromQuery]Params LaboratoryParams)
 {
-var Laboratory = await _unitOfWork.Laboratories.GetAllAsync(LaboratoryParams.PageIndex,LaboratoryParams.PageSize, LaboratoryParams.Search, "Name", typeof(string));
+var Laboratory = await _unitOfWork.Laboratories.GetAllAsync(LaboratoryParams.PageIndex,LaboratoryParams.PageSize, LaboratoryParams.Search, "Name");
 var listaLaboratoriesDto= _mapper.Map<List<LaboratoryDto>>(Laboratory.registros);
 return new Pager<LaboratoryDto>(listaLaboratoriesDto, Laboratory.totalRegistros,LaboratoryParams.PageIndex,LaboratoryParams.PageSize,LaboratoryParams.Search);
 }

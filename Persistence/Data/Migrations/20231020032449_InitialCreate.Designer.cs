@@ -11,7 +11,7 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(VeterinaryDBContext))]
-    [Migration("20231019164437_InitialCreate")]
+    [Migration("20231020032449_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -517,6 +517,18 @@ namespace Persistence.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("role", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Employee"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.SaleDetail", b =>

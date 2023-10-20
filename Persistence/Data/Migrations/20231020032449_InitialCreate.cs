@@ -483,6 +483,15 @@ namespace Persistence.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "role",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "Employee" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "species",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
